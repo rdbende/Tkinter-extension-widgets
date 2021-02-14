@@ -6,7 +6,7 @@
             
 file (str): Path to a tcl theme file\
 name (str): The name of the theme\
-pkg (str): Path to a folder containing pkgIndex.tcl and other tcl files
+pkg (str): Path to a folder containing **pkgIndex.tcl** and other tcl files
             
 #### Usage:
         
