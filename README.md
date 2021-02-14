@@ -42,7 +42,7 @@ is_visited = True or False
 
 #### Usage:
         
-```
+```bash
 link = LinkLabel(master, text='Link', url='https://', hovercolor='#ff0000')
 link.pack()
 ```
