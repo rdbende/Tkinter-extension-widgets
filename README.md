@@ -42,7 +42,9 @@ is_visited = True or False
 
 #### Usage:
         
+```
 link = LinkLabel(master, text='Link', url='https://', hovercolor='#ff0000')
 link.pack()
+```
                 
          
