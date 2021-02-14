@@ -1,14 +1,17 @@
 # Tkinter-extension-widgets
 
-## Theme
 
-#### Options:
+
+## Theme
+#### If you want to change the appearance of the tkinter window simply you can do so with the theme widget
+
+### Options:
             
 file (str): Path to a tcl theme file\
 name (str): The name of the theme\
 pkg (str): Path to a folder containing **pkgIndex.tcl** and other tcl files
             
-#### Usage:
+### Usage:
         
 If you only want to use one of ttk's built-in themes:\
 `theme = Theme(root, name='built in theme names e.g.: alt, clam, classic, default, aqua, vista, winnative, xpnative')`
@@ -21,7 +24,9 @@ If you have a theme package (e.g. [awthemes](https://sourceforge.net/projects/tc
 
 ## LinkLabel
 
-#### Standard label options:
+#### If you want a clickable widget you should use the LinkLabel
+
+### Standard label options:
             
 anchor, background, borderwidth, class\
 compound, cursor, font, foreground\
@@ -29,26 +34,43 @@ image, justify, padding, relief\
 state, style, takefocus, text\
 textvariable, underlinewidth, wraplength
                 
-#### Specific options:
+### Specific options:
             
 hovercolor (str): Color when you hover the label\
 url (str): The link that you want to open\
 visited (bool): Sets the link to be visited, it's false by default\
 visitedcolor (str): Color after you clicked the label
             
-#### Generates:
+### Generates:
 
 `<<LinkOpened>>`
             
-#### Variable:
+### Variable:
         
 `is_visited = True or False`
 
-#### Usage:
+### Usage:
         
 ```
 link = LinkLabel(master, text='Link', url='https://', hovercolor='#ff0000')
 link.pack()
 ```
+
+## Image
+
+#### If you want to display an image, but do not need PIL, the easiest solution is this widget
                 
-         
+### Options:
+            
+file (str): Path to image file valid filetypes: `pgm` `ppm` `gif` `png`\
+data (str): Image data URI\
+cursor (str): The cursor of the image, similar to other tkinter widgets\
+anchor (str): The anchor of the image, similar to other tkinter widgets\
+relief (str): The relief of the image, similar to other tkinter widgets
+            
+### Usage:
+
+```    
+image = Image(master, file='path to an image file you want to display', anchor='w', relief='groove')
+image.pack()
+```
