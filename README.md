@@ -58,7 +58,7 @@ link.pack()
 
 ## Image
 
-#### If you want to display an image, but do not need PIL, the easiest solution is this widget
+#### If you want to display an image, but do not need PIL, the easiest way is this widget
                 
 ### Options:
             
