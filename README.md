@@ -1,8 +1,6 @@
 # Tkinter-extension-widgets
 
-## Overview
-
-### Theme:
+## Theme
 
 Options:
             
@@ -21,7 +19,7 @@ If you want to use a single tcl file (e.g. [azure](https://github.com/rdbende/Az
 If you have a theme package (e.g. [awthemes](https://sourceforge.net/projects/tcl-awthemes/)), you can use it with:\
 `theme = Theme(root, pkg='path to a theme package', name='name of theme you want to use')`
 
-## LinkLabel:
+## LinkLabel
 
 Standard label options:
             
