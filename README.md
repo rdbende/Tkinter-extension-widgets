@@ -27,9 +27,9 @@ anchor, background, borderwidth, class, compound, cursor, font, foreground, imag
                 
 #### Specific options:
             
-hovercolor (str): Color when you hover the label
-url (str): The link that you want to open
-visited (bool): Sets the link to be visited, it's false by default
+hovercolor (str): Color when you hover the label\
+url (str): The link that you want to open\
+visited (bool): Sets the link to be visited, it's false by default\
 visitedcolor (str): Color after you clicked the label
             
 #### Generates:
