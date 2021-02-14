@@ -39,9 +39,9 @@ class LinkLabel(ttk.Label):
     def __init__(self, master=None, **kwargs):
         
         self._url = kwargs.pop("url", "https://")
-        self._normalcolor = kwargs.pop("foreground", "#0073cf")
-        self._hovercolor = kwargs.pop("hovercolor", "#1b33ba")
-        self._visitedcolor = kwargs.pop("visitedcolor", "#68059b")
+        self._normalcolor = kwargs.pop("foreground", "#007fff")
+        self._hovercolor = kwargs.pop("hovercolor", "#1133dd")
+        self._visitedcolor = kwargs.pop("visitedcolor", "#6600aa")
         self._visited = kwargs.pop("visited", False)
         self.cursor = kwargs.pop("cursor", "hand2")
         ttk.Label.__init__(self, master, **kwargs)
@@ -117,3 +117,4 @@ if __name__ == '__main__':
     label.bind('<<LinkOpened>>', callback)
     
     root.mainloop()
+
