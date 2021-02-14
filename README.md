@@ -71,6 +71,6 @@ relief (str): The relief of the image, similar to other tkinter widgets
 ### Usage:
 
 ```    
-image = Image(master, file='path to an image file you want to display', anchor='w', relief='groove')
+image = Image(master, file='path to the image file you want to display', anchor='w', relief='groove')
 image.pack()
 ```
