@@ -72,7 +72,7 @@ class LinkLabel(ttk.Label):
         if "disabled" not in self.state():
             self._visited = True
             self.is_visited = True
-            self.event_generate('<<LinkOpened>>')
+            self.event_generate("<<LinkOpened>>")
             webbrowser.open(self._url)
             self._leave()
 
