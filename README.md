@@ -34,7 +34,7 @@ visitedcolor (str): Color after you clicked the label
             
 #### Generates:
 
-<<LinkOpened>>
+`<<LinkOpened>>`
             
 #### Variable:
         
