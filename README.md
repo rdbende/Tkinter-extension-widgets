@@ -46,7 +46,7 @@ visitedcolor (str): Color after you clicked the label
 
 #### Usage:
         
-```
+```bash
 link = LinkLabel(master, text='Link', url='https://', hovercolor='#ff0000')
 link.pack()
 ```
