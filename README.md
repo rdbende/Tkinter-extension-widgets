@@ -23,7 +23,11 @@ If you have a theme package (e.g. [awthemes](https://sourceforge.net/projects/tc
 
 #### Standard label options:
             
-anchor, background, borderwidth, class, compound, cursor, font, foreground, image, justify, padding, relief, state, style, takefocus, text, textvariable, underlinewidth, wraplength
+anchor, background, borderwidth, class\
+compound, cursor, font, foreground\
+image, justify, padding, relief\
+state, style, takefocus, text\
+textvariable, underlinewidth, wraplength
                 
 #### Specific options:
             
@@ -38,11 +42,11 @@ visitedcolor (str): Color after you clicked the label
             
 #### Variable:
         
-is_visited = True or False
+`is_visited = True or False`
 
 #### Usage:
         
-```bash
+```
 link = LinkLabel(master, text='Link', url='https://', hovercolor='#ff0000')
 link.pack()
 ```
