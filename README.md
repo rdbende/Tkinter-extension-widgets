@@ -6,6 +6,7 @@
 
 
 <div id="theme"></div>
+
 ## Theme
 #### If you want to change the appearance of the tkinter window simply you can do so with the theme widget
 
@@ -33,6 +34,7 @@ theme = Theme(root, pkg='path to a theme package', name='name of theme you want 
 ```
 
 <div id="linklabel"></div>
+
 ## LinkLabel
 
 #### If you want a clickable widget you should use the LinkLabel
@@ -68,6 +70,7 @@ link.pack()
 ```
 
 <div id="image"></div>
+
 ## Image
 
 #### If you want to display an image, but do not need PIL, the easiest way is this widget
