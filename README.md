@@ -8,6 +8,7 @@
 
 <div id="theme"></div>
 
+\
 ## Theme
 #### If you want to change the appearance of the tkinter window simply you can do so with the theme widget
 
@@ -31,6 +32,7 @@ If you have a theme package (e.g. [awthemes](https://sourceforge.net/projects/tc
 
 <div id="tooltip"></div>
 
+\
 ## ToolTip
 
 #### Popup help for tkinter widgets
@@ -57,6 +59,7 @@ tooltip = ToolTip(master, text='Info')
 
 <div id="linklabel"></div>
 
+\
 ## LinkLabel
 
 #### If you want a clickable link widget you should use the LinkLabel
@@ -93,6 +96,7 @@ link.pack()
 
 <div id="image"></div>
 
+\
 ## Image
 
 #### If you want to display an image, but do not need PIL, the easiest way is this widget
