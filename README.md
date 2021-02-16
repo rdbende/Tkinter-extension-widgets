@@ -18,8 +18,8 @@ pkg (str): Path to a folder containing **pkgIndex.tcl** and other tcl files
             
 ### Usage:
         
-If you only want to use one of ttk's built-in themes:\
-`theme = Theme(root, name='built in theme names e.g.: alt, clam, classic, default, aqua, vista, winnative, xpnative')`
+If you only want to use one of ttk's built-in themes (e.g. alt, clam, classic, default, aqua, vista, winnative, xpnative):\
+`theme = Theme(root, name='theme name')`
 
 If you want to use a single tcl file (e.g. [azure](https://github.com/rdbende/Azure-ttk-theme)):\
 `theme = Theme(root, file='path to a tcl theme file')`
