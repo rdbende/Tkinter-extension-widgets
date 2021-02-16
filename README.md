@@ -1,7 +1,11 @@
 # Tkinter-extension-widgets
 
+* [Theme](#theme)
+* [LinkLabel](#linklabel)
+* [Image](#image)
 
 
+<div id="theme"></div>
 ## Theme
 #### If you want to change the appearance of the tkinter window simply you can do so with the theme widget
 
@@ -28,6 +32,7 @@ If you have a theme package (e.g. [awthemes](https://sourceforge.net/projects/tc
 theme = Theme(root, pkg='path to a theme package', name='name of theme you want to use')
 ```
 
+<div id="linklabel"></div>
 ## LinkLabel
 
 #### If you want a clickable widget you should use the LinkLabel
@@ -62,6 +67,7 @@ link = LinkLabel(master, text='Link', url='https://', hovercolor='#ff0000')
 link.pack()
 ```
 
+<div id="image"></div>
 ## Image
 
 #### If you want to display an image, but do not need PIL, the easiest way is this widget
