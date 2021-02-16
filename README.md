@@ -1,6 +1,7 @@
 # Tkinter-extension-widgets
 
 * [Theme](#theme)
+* [ToolTip](#tooltip)
 * [LinkLabel](#linklabel)
 * [Image](#image)
 
@@ -27,11 +28,38 @@ If you want to use a single tcl file (e.g. [azure](https://github.com/rdbende/Az
 If you have a theme package (e.g. [awthemes](https://sourceforge.net/projects/tcl-awthemes/)), you can use it with:\
 `theme = Theme(root, pkg='path to a theme package', name='name of theme you want to use')`
 
+
+<div id="tooltip"></div>
+
+## ToolTip
+
+#### Popup help for tkinter widgets
+
+### Standard label options:
+            
+anchor, background, borderwidth, class
+compound, cursor, font, foreground, image
+justify, padding, relief, state, style, takefocus
+text, textvariable, underlinewidth, wraplength
+
+### Specific options:
+
+wait (int): Waiting before appearing (s)
+duration (int): Waiting before disappearing (s)
+direction (str): Direction relative to the parent (above/below/right/left/cursor)
+ipadx (str): Inner X padding of the tooltip 
+ipady (str): Inner Y padding of the tooltip 
+
+### Usage:
+```python    
+tooltip = ToolTip(master, text='Info')
+```
+
 <div id="linklabel"></div>
 
 ## LinkLabel
 
-#### If you want a clickable widget you should use the LinkLabel
+#### If you want a clickable link widget you should use the LinkLabel
 
 ### Standard label options:
             
