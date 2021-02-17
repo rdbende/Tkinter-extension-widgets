@@ -44,13 +44,10 @@ class Theme(ttk.Style):
             if self._file != None:
                 self.master.tk.call('source', self._file)
                 self.theme_use(os.path.basename(self._file).replace(".tcl", ""))
-                self.theme = os.path.basename(self._file).replace(".tcl", "")
             else:
-                    self.theme_use(self._name)
-                    self.theme = self._name
-            
+                self.theme_use(self._name)
         except Exception:
-            raise Exception ("Parent widget must be a root, or a toplevel window!")
+            raise Exception ("Something went wrong setting the theme")
         
     def cget(self, key):
         """Return the resource value for a KEY given as string"""
