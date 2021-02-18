@@ -21,17 +21,17 @@ pkg (str): Path to a folder containing **pkgIndex.tcl** and other tcl files
             
 ### Usage:
         
-If you only want to use one of ttk's built-in themes (e.g. alt, clam, classic, default, aqua, vista, winnative, xpnative):\
+If you only want to use one of ttk's built-in themes (e.g. alt, clam, classic, default, aqua, vista, winnative, xpnative):
 ```python
 theme = Theme(master, name='theme name')
 ```
 
-If you want to use a single tcl file (e.g. [azure](https://github.com/rdbende/Azure-ttk-theme), [breeze](https://github.com/MaxPerl/ttk-Breeze), [waldorf](https://wiki.tcl-lang.org/page/waldorf+ttk+theme), or a theme from [ttkthemes](https://github.com/TkinterEP/ttkthemes)):\
+If you want to use a single tcl file (e.g. [azure](https://github.com/rdbende/Azure-ttk-theme), [breeze](https://github.com/MaxPerl/ttk-Breeze), [waldorf](https://wiki.tcl-lang.org/page/waldorf+ttk+theme), or a theme from [ttkthemes](https://github.com/TkinterEP/ttkthemes)):
 ```python
 theme = Theme(master, file='path to a tcl theme file')
 ```
                 
-If you have a theme package (e.g. [awthemes](https://sourceforge.net/projects/tcl-awthemes/)), you can use it with:\
+If you have a theme package (e.g. [awthemes](https://sourceforge.net/projects/tcl-awthemes/)), you can use it with:
 ```python
 theme = Theme(master, pkg='path to a theme package', name='name of theme you want to use')
 ```
