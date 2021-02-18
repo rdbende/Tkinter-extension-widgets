@@ -48,15 +48,15 @@ text, textvariable, underlinewidth, wraplength
 
 ### Specific options:
 
-wait (int): Wait before appearing (s)\
-duration (int): Wait before disappearing (s)\
-direction (str): Direction relative to the parent (above/below/right/left/cursor)\
+wait (int): Wait before appearing in seconds\
+duration (int): Wait before disappearing in seconds\
+direction (str): Direction relative to the parent. Directions: `cursor` `above` `below` `right` `left`\
 ipadx (str): Inner X padding of the tooltip\
 ipady (str): Inner Y padding of the tooltip 
 
 ### Usage:
 ```python    
-tooltip = ToolTip(master, text='Info')
+tooltip = ToolTip(master, text='Info', wait='1', duration='5', direction='cursor')
 ```
 
 <div id="linklabel"></div>
@@ -93,7 +93,7 @@ visitedcolor (str): Color after you clicked the label
 ### Usage:
         
 ```python
-link = LinkLabel(master, text='Link', url='https://', hovercolor='#ff0000')
+link = LinkLabel(master, text='Link', url='https://github.com/rdbende/Tkinter-extension-widgets', hovercolor='#00ff00')
 link.pack()
 ```
 
@@ -116,6 +116,6 @@ relief (str): The relief of the image, similar to other tkinter widgets
 ### Usage:
 
 ```python
-image = Image(master, file='path to the image file you want to display', anchor='w', relief='groove')
+image = Image(master, file='path to the image file you want to display', cursor='hand2', anchor='w', relief='groove')
 image.pack()
 ```
