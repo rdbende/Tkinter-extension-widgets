@@ -47,9 +47,9 @@ theme = Theme(master, pkg='path to a theme package', name='name of theme you wan
 
 ### Standard label options:
             
-anchor, background, borderwidth, class
-compound, cursor, font, foreground, image
-justify, padding, relief, state, style, takefocus
+anchor, background, borderwidth, class\
+compound, cursor, font, foreground, image\
+justify, padding, relief, state, style, takefocus\
 text, textvariable, underlinewidth, wraplength
 
 ### Specific options:
