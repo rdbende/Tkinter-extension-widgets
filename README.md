@@ -56,7 +56,7 @@ ipady (str): Inner Y padding of the tooltip
 
 ### Usage:
 ```python    
-tooltip = ToolTip(master, text='Info', wait='1', duration='5', direction='cursor')
+tooltip = ToolTip(master, text='ToolTip', wait='1', duration='5', direction='cursor')
 ```
 
 <div id="linklabel"></div>
@@ -93,7 +93,7 @@ visitedcolor (str): Color after you clicked the label
 ### Usage:
         
 ```python
-link = LinkLabel(master, text='Link', url='https://github.com/rdbende/Tkinter-extension-widgets', hovercolor='#00ff00')
+link = LinkLabel(master, text='LinkLabel', url='https://github.com/rdbende/Tkinter-extension-widgets')
 link.pack()
 ```
 
