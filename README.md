@@ -107,7 +107,7 @@ link.pack()
                 
 ### Options:
             
-file (str): Path to image file. Valid filetypes: `pgm` `ppm` `gif` `png`\
+file (str): Path to image file. Valid filetypes: `gif` `png` `pgm` `ppm`\
 data (str): Image data URI\
 cursor (str): The cursor of the image, similar to other tkinter widgets\
 anchor (str): The anchor of the image, similar to other tkinter widgets\
