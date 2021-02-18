@@ -24,7 +24,7 @@ pkg (str): Path to a folder containing **pkgIndex.tcl** and other tcl files
 If you only want to use one of ttk's built-in themes (e.g. alt, clam, classic, default, aqua, vista, winnative, xpnative):\
 `theme = Theme(root, name='theme name')`
 
-If you want to use a single tcl file (e.g. [azure](https://github.com/rdbende/Azure-ttk-theme)):\
+If you want to use a single tcl file (e.g. [azure](https://github.com/rdbende/Azure-ttk-theme), [breeze](https://github.com/MaxPerl/ttk-Breeze), [waldorf](https://wiki.tcl-lang.org/page/waldorf+ttk+theme), or a theme from [ttkthemes](https://github.com/TkinterEP/ttkthemes)):\
 `theme = Theme(root, file='path to a tcl theme file')`
                 
 If you have a theme package (e.g. [awthemes](https://sourceforge.net/projects/tcl-awthemes/)), you can use it with:\
@@ -48,10 +48,10 @@ text, textvariable, underlinewidth, wraplength
 
 ### Specific options:
 
-wait (int): Waiting before appearing (s)
-duration (int): Waiting before disappearing (s)
-direction (str): Direction relative to the parent (above/below/right/left/cursor)
-ipadx (str): Inner X padding of the tooltip 
+wait (int): Wait before appearing (s)\
+duration (int): Wait before disappearing (s)\
+direction (str): Direction relative to the parent (above/below/right/left/cursor)\
+ipadx (str): Inner X padding of the tooltip\
 ipady (str): Inner Y padding of the tooltip 
 
 ### Usage:
