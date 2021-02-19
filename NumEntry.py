@@ -60,21 +60,17 @@ class NumEntry(ttk.Entry):
         
     def cget(self, key):
         """Return the resource value for a KEY given as string"""
-        if key == "url":
-            return self._url
-        elif key == "hovercolor":
-            return self._hovercolor
-        elif key == "visitedcolor":
-            return self._visitedcolor
-        elif key == "visited":
-            return self._visited
+        if key == "allowfloats":
+            return self._floats
+        elif key == "expressions":
+            return self._expr
         else:
-            return ttk.Label.cget(self, key)    
+            return ttk.Entry.cget(self, key)    
     
     def keys(self):
         """Return a list of all resource names of this widget"""
-        keys = ttk.Label.keys(self)
-        keys.extend(["hovercolor", "url", "visited", "visitedcolor", ])
+        keys = ttk.Entry.keys(self)
+        keys.extend(["allowfloats", "expressions"])
         keys = sorted(keys)
         return keys
 
