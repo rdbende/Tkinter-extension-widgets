@@ -17,8 +17,8 @@ class NumEntry(ttk.Entry):
                 
         Specific options:
             
-            allowfloats (bool): allow the use of floats
-            expressions (bool): allow the use of expressions (default is True)
+            allowfloats (bool): Allow the use of floats (default is False)
+            expressions (bool): Allow the use of expressions (default is True)
             
         Usage:
         
@@ -26,7 +26,7 @@ class NumEntry(ttk.Entry):
             numentry.pack(pady=20)
     """
     
-    def __init__(self, master, expressions=True, allowfloats=True, **kwargs):
+    def __init__(self, master, expressions=True, allowfloats=False, **kwargs):
         self._expr = expressions
         self._floats = allowfloats
         ttk.Entry.__init__(self, master, **kwargs)
