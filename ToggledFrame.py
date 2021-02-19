@@ -7,7 +7,7 @@ class ToggledFrame(ttk.Frame):
     """
         A collapsible and expandable frame for tkinter
                 
-        ToggledFrame options:
+        Options:
             
             text (str): The text shown on the expander button
             width (int): The width of the expander button given in characters
