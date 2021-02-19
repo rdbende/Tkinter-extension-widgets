@@ -1,4 +1,4 @@
-# Tkinter-extension-widgets
+# Tkinter extension widgets
 
 * [Theme](#theme)
 * [NumEntry](#numentry)
