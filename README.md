@@ -104,7 +104,7 @@ link = LinkLabel(master, text='LinkLabel', url='https://github.com/rdbende/Tkint
 link.pack()
 ```
 
-<div id="toggle"></div>
+<div id="toggled"></div>
 
 <br>
 
