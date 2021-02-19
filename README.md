@@ -53,7 +53,7 @@ invalidcommand, justify, show\
 state, style, takefocusxscrollcommand\
 textvariable, validate, validatecommand, width
                 
-### Specific options:
+### Widget-specific options:
             
 allowfloats (bool): Allow the use of floats (default is False)\
 expressions (bool): Allow the use of expressions (default is True)
@@ -81,7 +81,7 @@ compound, cursor, font, foreground, image\
 justify, padding, relief, state, style, takefocus\
 text, textvariable, underlinewidth, wraplength
 
-### Specific options:
+### Widget-specific options:
 
 wait (int): Wait before appearing in seconds\
 duration (int): Wait before disappearing in seconds\
@@ -110,20 +110,24 @@ justify, style, takefocus, text\
 textvariable, underline, padding\
 relief, width,  wraplength
                 
-### Specific options:
+### Widget-specific options:
             
 hovercolor (hex-color): Color when you hover the label\
 url (str): The link that you want to open\
 visited (bool): Sets the link to be visited, (default is False)\
 visitedcolor (hex-color): Color after the label was clicked
             
-### Generates:
+### Virtual Event:
 
 `<<LinkOpened>>`
+
+### Widget method:
+
+`clear` Clears the visited, and hovered statement
             
 ### Variable:
         
-`is_visited = True or False`
+`is_visited` True or False
 
 ### Usage:
         
@@ -147,19 +151,19 @@ width (int): The width of the expander button given in characters\
 cursor (str): The expander button's cursor\
 expanded (bool): Determines whether the frame is open by default
             
-### Generates:
+### Virtual Events:
 
 `<<ToggledFrameToggled>>`\
 `<<ToggledFrameExpanded>>`\
 `<<ToggledFrameCollapsed>>`
             
-### Method:
+### Widget method:
             
-`toggle : expand or collapse the frame`
+`toggle` Expand or collapse the frame
             
 ### Variable:
         
-`state : expanded or collapsed`
+`state` expanded or collapsed
             
 ### Usage:
 
