@@ -149,7 +149,7 @@ button.pack()
 
 ## Image
 
-#### If you want to display an image, but do not need PIL, the easiest way is this widget
+#### If you want to display an image, without PhotoImage or PIL, the easiest way is this widget
                 
 ### Options:
             
