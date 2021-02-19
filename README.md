@@ -1,6 +1,7 @@
 # Tkinter-extension-widgets
 
 * [Theme](#theme)
+* [NumEntry](#numentry)
 * [ToolTip](#tooltip)
 * [LinkLabel](#linklabel)
 * [ToggledFrame](#toggled)
@@ -35,6 +36,33 @@ theme = Theme(master, file='path to a tcl theme file')
 If you have a theme package (e.g. [awthemes](https://sourceforge.net/projects/tcl-awthemes/)), you can use it with:
 ```python
 theme = Theme(master, pkg='path to a theme package', name='name of theme you want to use')
+```
+
+<div id="numentry"></div>
+
+<br>
+
+## NumEntry
+
+#### An entry that takes numbers and calculates the result of a calculation
+        
+### Standard entry options:
+            
+class, cursor, exportselection\
+invalidcommand, justify, show\
+state, style, takefocusxscrollcommand\
+textvariable, validate, validatecommand, width
+                
+### Specific options:
+            
+allowfloats (bool): Allow the use of floats\
+expressions (bool): Allow the use of expressions (default is True)
+            
+### Usage:
+
+```python
+numentry = NumEntry(master, allowfloats=True)
+numentry.pack(pady=20)
 ```
 
 
@@ -76,18 +104,18 @@ tooltip = ToolTip(master, text='ToolTip', wait='1', duration='5', direction='cur
 
 ### Standard label options:
             
-anchor, background, borderwidth, class\
-compound, cursor, font, foreground\
-image, justify, padding, relief\
-state, style, takefocus, text\
-textvariable, underlinewidth, wraplength
+anchor, background, class, compound\
+cursor, font, foreground, image\
+justify, style, takefocus, text\
+textvariable, underline, padding\
+relief, width,  wraplength
                 
 ### Specific options:
             
 hovercolor (hex-color): Color when you hover the label\
 url (str): The link that you want to open\
-visited (bool): Sets the link to be visited, it's false by default\
-visitedcolor (hex-color): Color after you clicked the label
+visited (bool): Sets the link to be visited, (default is False)\
+visitedcolor (hex-color): Color after the label was clicked
             
 ### Generates:
 
