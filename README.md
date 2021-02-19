@@ -55,7 +55,7 @@ textvariable, validate, validatecommand, width
                 
 ### Specific options:
             
-allowfloats (bool): Allow the use of floats\
+allowfloats (bool): Allow the use of floats (default is False)\
 expressions (bool): Allow the use of expressions (default is True)
             
 ### Usage:
