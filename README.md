@@ -57,8 +57,8 @@ text, textvariable, underlinewidth, wraplength
 wait (int): Wait before appearing in seconds\
 duration (int): Wait before disappearing in seconds\
 direction (str): Direction relative to the parent. Directions: `cursor` `above` `below` `right` `left`\
-ipadx (str): Inner X padding of the tooltip\
-ipady (str): Inner Y padding of the tooltip 
+ipadx (int): Inner X padding of the tooltip\
+ipady (int): Inner Y padding of the tooltip 
 
 ### Usage:
 ```python    
@@ -83,10 +83,10 @@ textvariable, underlinewidth, wraplength
                 
 ### Specific options:
             
-hovercolor (str): Color when you hover the label\
+hovercolor (hex-color): Color when you hover the label\
 url (str): The link that you want to open\
 visited (bool): Sets the link to be visited, it's false by default\
-visitedcolor (str): Color after you clicked the label
+visitedcolor (hex-color): Color after you clicked the label
             
 ### Generates:
 
