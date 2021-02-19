@@ -3,6 +3,7 @@
 * [Theme](#theme)
 * [ToolTip](#tooltip)
 * [LinkLabel](#linklabel)
+* [ToggledFrame](#toggled)
 * [Image](#image)
 
 
@@ -101,6 +102,45 @@ visitedcolor (hex-color): Color after you clicked the label
 ```python
 link = LinkLabel(master, text='LinkLabel', url='https://github.com/rdbende/Tkinter-extension-widgets')
 link.pack()
+```
+
+<div id="toggle"></div>
+
+<br>
+
+## ToggledFrame
+
+#### If you want to save whitespace, it's a great idea to use the ToggledFrame
+                
+### Options:
+            
+text (str): The text shown on the expander button\
+width (int): The width of the expander button given in characters\
+cursor (str): The expander button's cursor\
+expanded (bool): Determines whether the frame is open by default
+            
+### Generates:
+
+`<<ToggledFrameToggled>>`\
+`<<ToggledFrameExpanded>>`\
+`<<ToggledFrameCollapsed>>`
+            
+### Method:
+            
+`toggle : expand or collapse the frame`
+            
+### Variable:
+        
+`state : expanded or collapsed`
+            
+### Usage:
+
+```python
+frame = ToggledFrame(master, text="Toggle", width=40, expanded=True)
+frame.pack()
+            
+button = ttk.Button(frame.frame, text="Button")
+button.pack()
 ```
 
 <div id="image"></div>
