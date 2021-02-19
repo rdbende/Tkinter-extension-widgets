@@ -82,21 +82,21 @@ class LinkLabel(ttk.Label):
         
     def cget(self, key):
         """Return the resource value for a KEY given as string"""
-        if key == "url":
-            return self._url
-        elif key == "hovercolor":
+        if key == "hovercolor":
             return self._hovercolor
-        elif key == "visitedcolor":
-            return self._visitedcolor
+        elif key == "url":
+            return self._url
         elif key == "visited":
             return self._visited
+        elif key == "visitedcolor":
+            return self._visitedcolor
         else:
             return ttk.Label.cget(self, key)    
     
     def keys(self):
         """Return a list of all resource names of this widget"""
         keys = ttk.Label.keys(self)
-        keys.extend(["hovercolor", "url", "visited", "visitedcolor", ])
+        keys.extend(["hovercolor", "url", "visited", "visitedcolor"])
         keys = sorted(keys)
         return keys
 
