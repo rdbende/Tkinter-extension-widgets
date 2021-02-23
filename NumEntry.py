@@ -41,7 +41,7 @@ class NumEntry(ttk.Entry):
             try:
                 expression = re.sub("[^0-9, +, -, *, /, **, //, %, .]", "", current)
                 if self._round == 0:
-                    self._new = eval(expression)
+                    self._new = int(eval(expression))
                 else:
                     self._new = round(float(eval(expression)), self._round)
                 self.delete(0, "end")
@@ -52,7 +52,7 @@ class NumEntry(ttk.Entry):
                 self.insert(0, self._old)
         else:
             if self._round == 0:
-                numbers = re.sub("[^0-9, .]", "", current)
+                numbers = int(re.sub("[^0-9, .]", "", current))
             else:
                 numbers = round(float(re.sub("[^0-9, .]", "", current)), self._round)
             self.delete(0, "end")
