@@ -55,13 +55,13 @@ textvariable, validate, validatecommand, width
                 
 ### Widget-specific options:
             
-allowfloats (bool): Allow the use of floats (default is False)\
-expressions (bool): Allow the use of expressions (default is True)
+expressions (bool): Allow the use of expressions (default is True)\
+roundto (int): The number of decimals in the result
             
 ### Usage:
 
 ```python
-numentry = NumEntry(master, allowfloats=True)
+numentry = NumEntry(master, roundto=2)
 numentry.pack(pady=20)
 ```
 
