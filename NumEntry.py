@@ -17,18 +17,18 @@ class NumEntry(ttk.Entry):
                 
         Specific options:
             
-            allowfloats (bool): Allow the use of floats (default is False)
             expressions (bool): Allow the use of expressions (default is True)
+            roundto (bool): The number of decimals in the result
             
         Usage:
         
-            numentry = NumEntry(master, allowfloats=True)
+            numentry = NumEntry(master, roundto=2)
             numentry.pack(pady=20)
     """
     
-    def __init__(self, master, expressions=True, allowfloats=False, **kwargs):
+    def __init__(self, master, expressions=True, roundto=0, **kwargs):
         self._expr = expressions
-        self._floats = allowfloats
+        self._round = roundto
         ttk.Entry.__init__(self, master, **kwargs)
         self.bind("<Return>", self._eval)
         self.bind("<FocusOut>", self._eval)
@@ -39,11 +39,11 @@ class NumEntry(ttk.Entry):
         current = self.get()
         if self._expr:
             try:
-                expression = re.sub("[^0-9, +, -, *, /, .]", "", current)
-                if self._floats:
+                expression = re.sub("[^0-9, +, -, *, /, **, //, %, .]", "", current)
+                if self._round == 0:
                     self._new = eval(expression)
                 else:
-                    self._new = round(eval(expression))
+                    self._new = round(float(eval(expression)), self._round)
                 self.delete(0, "end")
                 self.insert(0, self._new)
                 self._old = self._new
@@ -51,26 +51,26 @@ class NumEntry(ttk.Entry):
                 self.delete(0, "end")
                 self.insert(0, self._old)
         else:
-            if self._floats:
+            if self._round == 0:
                 numbers = re.sub("[^0-9, .]", "", current)
             else:
-                numbers = re.sub("[^0-9]", "", current)
+                numbers = round(float(re.sub("[^0-9, .]", "", current)), self._round)
             self.delete(0, "end")
             self.insert(0, numbers)
         
     def cget(self, key):
         """Return the resource value for a KEY given as string"""
-        if key == "allowfloats":
-            return self._floats
-        elif key == "expressions":
+        if key == "expressions":
             return self._expr
+        elif key == "roundto":
+            return self._round
         else:
             return ttk.Entry.cget(self, key)    
     
     def keys(self):
         """Return a list of all resource names of this widget"""
         keys = ttk.Entry.keys(self)
-        keys.extend(["allowfloats", "expressions"])
+        keys.extend(["expressions", "roundto"])
         keys = sorted(keys)
         return keys
 
@@ -82,7 +82,7 @@ if __name__ == '__main__':
     root.title('NumEntry')
     root.geometry('250x70')
         
-    entry = NumEntry(root)
+    entry = NumEntry(root, expressions=True, roundto=10)
     entry.pack(pady=20)
     
     root.mainloop()
