@@ -85,15 +85,16 @@ text, textvariable, underlinewidth, wraplength
 
 ### Widget-specific options:
 
-wait (int): Wait before appearing in seconds\
-duration (int): Wait before disappearing in seconds\
-direction (str): Direction relative to the parent. Directions: `cursor` `above` `below` `right` `left`\
-ipadx (int): Inner X padding of the tooltip\
-ipady (int): Inner Y padding of the tooltip 
+wait (int): Wait before appearing in seconds (default is 1)\
+duration (int): Wait before disappearing in seconds(default is 10)\
+direction (str): Direction relative to the parent. Directions: `cursor` `above` `below` `right` `left` (default is `cursor`)\
+ipadx (int): Inner X padding of the tooltip (default is 3)\
+ipady (int): Inner Y padding of the tooltip (default is 1)
+
 
 ### Usage:
 ```python    
-tooltip = ToolTip(master, text='ToolTip', wait='1', duration='5', direction='cursor')
+tooltip = ToolTip(master, text='ToolTip', wait='1', duration='5')
 ```
 
 <div id="linklabel"></div>
