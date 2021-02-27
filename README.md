@@ -5,6 +5,7 @@
 * [ToolTip](#tooltip)
 * [LinkLabel](#linklabel)
 * [ToggledFrame](#toggled)
+* [PopupMenu](#popupmenu)
 * [Image](#image)
 
 
@@ -13,7 +14,8 @@
 <br>
 
 ## Theme
-#### If you want to change the appearance of the tkinter window simply you can do so with the theme widget
+
+#### If you want to change the appearance of you Tkinter window simply you can do so with the theme widget
 
 ### Options:
             
@@ -100,7 +102,7 @@ tooltip = ToolTip(master, text='ToolTip', wait='1', duration='5', direction='cur
 
 ## LinkLabel
 
-#### If you want a clickable link widget you should use the LinkLabel
+#### If you want a widget that opens a website you should use LinkLabel
 
 ### Standard label options:
             
@@ -142,7 +144,7 @@ link.pack()
 
 ## ToggledFrame
 
-#### If you want to save whitespace, it's a great idea to use the ToggledFrame
+#### If you want to save whitespace, it's a great idea to use ToggledFrame
                 
 ### Options:
             
@@ -173,6 +175,38 @@ frame.pack()
             
 button = ttk.Button(frame.frame, text="Button")
 button.pack()
+```
+
+<div id="popupmenu"></div>
+
+<br>
+
+## PopupMenu
+
+#### Popup menus are very useful, but so complicated to create them in Tkinter, so this is the widget you need
+
+### Standard menu options:
+            
+activebackground, activeborderwidth\
+activeforeground, background, bd, bg\
+borderwidth, cursor, disabledforeground\
+fg, font, foreground, name, postcommand\
+relief, selectcolor, takefocus, tearoff\
+tearoffcommand, title, type
+                
+### Widget-specific options:
+            
+relx (int): The X position of the popup relative to the cursor, in pixels (default is -3)\
+rely (int): The Y position of the popup relative to the cursor, in pixels (default is -3)
+            
+### Virtual Event:
+        
+`<<PopupMenuPopup>>`
+            
+### Usage:
+        
+```python
+popupmenu = PopupMenu(master)
 ```
 
 <div id="image"></div>
