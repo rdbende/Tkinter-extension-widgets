@@ -5,31 +5,26 @@ from tkinter import ttk as ttk
 
 class ToggledFrame(ttk.Frame):
     """
-        A collapsible and expandable frame for tkinter
-                
+        If you want to save whitespace, it's a great idea to use ToggledFrame
+        
         Options:
-            
             text (str): The text shown on the expander button
             width (int): The width of the expander button given in characters
             cursor (str): The expander button's cursor
             expanded (bool): Determines whether the frame is open by default
-            
-        Generates:
-            
+
+        Virtual Events:
             <<ToggledFrameToggled>>
             <<ToggledFrameExpanded>>
             <<ToggledFrameCollapsed>>
-            
-        Method:
-            
-            toggle : expand or collapse the frame
-            
+
+        Widget method:
+            toggle Expand or collapse the frame
+
         Variable:
-        
-            state : expanded or collapsed
-            
+            state expanded or collapsed
+
         Usage:
-        
             frame = ToggledFrame(master, text="Toggle", width=40, expanded=True)
             frame.pack()
             
