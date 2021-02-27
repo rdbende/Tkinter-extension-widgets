@@ -4,21 +4,18 @@ import tkinter as tk
 
 class Image(tk.Label):
     """
-        An image display widget for tkinter
-                
-        Image options:
-            
-            file (str): Path to image file
-            data (str): Image data
+        If you want to display an image, without PhotoImage or PIL, the easiest way is this widget
+        
+        Options:
+            file (str): Path to image file. Valid filetypes: gif png pgm ppm
+            data (str): Image data URI
             cursor (str): The cursor of the image, similar to other tkinter widgets
             anchor (str): The anchor of the image, similar to other tkinter widgets
             relief (str): The relief of the image, similar to other tkinter widgets
-            
-        Usage:
-        
-            image = Image(master, file='path to the image file you want to display', anchor='w', relief='groove')
-            image.pack()
 
+            Usage:
+            image = Image(master, file='path to the image file you want to display', cursor='hand2', relief='groove')
+            image.pack()
     """
 
     def __init__(self, master, **kwargs):
