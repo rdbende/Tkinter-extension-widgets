@@ -4,29 +4,22 @@ import tkinter as tk
 
 class PopupMenu(tk.Menu):
     """
-        A simple popupmenu for tkinter
+        Popup menus are very useful, but so complicated to create them in Tkinter, so this is the widget you need
         
         Standard menu options:
-            
-            activebackground, activeborderwidth,
+            activebackground, activeborderwidth
             activeforeground, background, bd, bg
             borderwidth, cursor, disabledforeground
             fg, font, foreground, name, postcommand
             relief, selectcolor, takefocus, tearoff
             tearoffcommand, title, type
-                
+
         Widget-specific options:
-            
-            relx (int): The X position of the popup relative to the cursor, in pixels
-            rely (int): The Y position of the popup relative to the cursor, in pixels
-            
+            relx (int): The X position of the popup relative to the cursor, in pixels (default is -3)
+            rely (int): The Y position of the popup relative to the cursor, in pixels (default is -3)
+
         Virtual Event:
-        
             <<PopupMenuPopup>>
-            
-        Usage:
-        
-            popupmenu = PopupMenu(master)
     """
     
     def __init__(self, master=None, relx=-2, rely=-2, **kwargs):
