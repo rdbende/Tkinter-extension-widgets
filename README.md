@@ -58,7 +58,7 @@ textvariable, validate, validatecommand, width
 ### Widget-specific options:
             
 expressions (bool): Allow the use of expressions (default is True)\
-roundto (int): The number of decimals in the result
+roundto (int): The number of decimals in the result (default is 0)
             
 ### Usage:
 
