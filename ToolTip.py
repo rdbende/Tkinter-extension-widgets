@@ -4,26 +4,23 @@ import tkinter as tk
 
 class ToolTip(object):
     """
-        A simple tooltip widget for tkinter
+        Popup help for tkinter widgets
         
         Standard label options:
-            
             anchor, background, borderwidth, class
             compound, cursor, font, foreground, image
             justify, padding, relief, state, style, takefocus
             text, textvariable, underlinewidth, wraplength
 
-        Specific options:
-            
-            wait (int): Wait before appearing (in seconds)
-            duration (int): Wait before disappearing (in seconds)
-            direction (str): Direction relative to the parent. Directions: cursor, above, below, right, left
-            ipadx (int): Inner X padding of the tooltip
-            ipady (int): Inner Y padding of the tooltip
-            
+        Widget-specific options:
+            wait (int): Wait before appearing in seconds (default is 1)
+            duration (int): Wait before disappearing in seconds(default is 10)
+            direction (str): Direction relative to the parent. Directions: cursor above below right left (default is cursor)
+            ipadx (int): Inner X padding of the tooltip (default is 3)
+            ipady (int): Inner Y padding of the tooltip (default is 1)
+
         Usage:
-        
-            tooltip = ToolTip(master, text='Info', background='#cccccc')
+            tooltip = ToolTip(master, text='ToolTip', wait='1', duration='5', direction='cursor')
     """
     
     def __init__(self, master, **kwargs):
