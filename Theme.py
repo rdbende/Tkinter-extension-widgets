@@ -6,29 +6,22 @@ import os.path
 
 class Theme(ttk.Style):
     """
-        A theme widget for ttk to simply set the main window's theme
-                
+        If you want to change the appearance of you Tkinter window simply you can do so with the theme widget
+        
         Options:
-            
             file (str): Path to a tcl theme file
             name (str): The name of the theme
-            pkg (str): Path to a folder containing pkgIndex.tcl and other tcl theme files
-            
+            pkg (str): Path to a folder containing pkgIndex.tcl and other tcl files
+
         Usage:
+            If you only want to use one of ttk's built-in themes (e.g. alt, clam, classic, default, aqua, vista, winnative, xpnative):
+                theme = Theme(master, name='theme name')
+                
+            If you want to use a single tcl file (e.g. azure, breeze, waldorf, or a theme from ttkthemes):
+                theme = Theme(master, file='path to a tcl theme file')
         
-            If you only want to use one of ttk's built-in themes:
-                theme = Theme(root, name='built in theme names e.g.: 'alt', 'clam', 'classic', 'default', 'aqua', 'vista', 'winnative', 'xpnative'')
-                
-            If you want to use a single tcl file (e.g. azure):
-                theme = Theme(root, file='path to a single tcl theme file')
-                
             If you have a theme package (e.g. awthemes), you can use it with:
-                theme = Theme(root, pkg='path to a theme package', name='name of theme you want to use from the package')
-                
-        Variable:
-        
-            theme : the name of the current theme
-                
+                theme = Theme(master, pkg='path to a theme package', name='name of theme you want to use')         
     """
 
     def __init__(self, master, name=None, file=None, pkg=None):
