@@ -6,37 +6,32 @@ import webbrowser
 
 class LinkLabel(ttk.Label):
     """
-        A clickable label that opens a link
+        If you want a widget that opens a website you should use LinkLabel
         
         Standard label options:
-            
-            anchor, background, borderwidth, class
-            compound, cursor, font, foreground, image
-            justify, padding, relief, state, style, takefocus
-            text, textvariable, underlinewidth, wraplength
-                
-        Specific options:
-            
+            anchor, background, class, compound
+            cursor, font, foreground, image
+            justify, style, takefocus, text
+            textvariable, underline, padding
+            relief, width, wraplength
+
+        Widget-specific options:
             hovercolor (hex-color): Color when you hover the label
             url (str): The link that you want to open
-            visited (bool): Sets the link to be visited, it's false by default
-            visitedcolor (hex-color): Color after you clicked the label
-            
-        Generates:
-        
+            visited (bool): Sets the link to be visited, (default is False)
+            visitedcolor (hex-color): Color after the label was clicked
+
+        Virtual Event:
             <<LinkOpened>>
-            
+
+        Widget method:
+            clear : Clears the visited, and hovered statement
+
         Variable:
-        
             is_visited : True or False
-            
-        Method:
-            
-            clear : clears the visited, and hovered statement
-            
+
         Usage:
-        
-            link = LinkLabel(master, text='Link', url='http://', hovercolor='#ff0000')
+            link = LinkLabel(master, text='LinkLabel', url='https://github.com/rdbende/Tkinter-extension-widgets')
             link.pack()
     """
     
