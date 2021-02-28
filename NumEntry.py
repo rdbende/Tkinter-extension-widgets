@@ -34,7 +34,7 @@ class NumEntry(ttk.Entry):
 
     def _eval(self, *args):
         current = self.get()
-        expression = str(re.sub("[^0-9][+, -, *, /, **, //, %, .]", "", current))
+        expression = str(re.sub("[^0-9], +, -, *, /, %, ., [//, **]", "", current))
         if len(expression) > 0:
             if self._expr:
                 if int(self._round) == 0:
