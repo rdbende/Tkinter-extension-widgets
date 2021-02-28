@@ -5,7 +5,7 @@ import _tkinter
 
 class MenuBar(tk.Menu):
     """
-        A simple menubar for tkinter
+        A simple menu bar that appears on the top of the window
         
         Standard menu options:
             
