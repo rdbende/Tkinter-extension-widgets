@@ -34,26 +34,30 @@ class NumEntry(ttk.Entry):
 
     def _eval(self, *args):
         current = self.get()
-        expression = str(re.sub("[^0-9], +, -, *, /, %, ., [//, **]", "", current))
-        if len(expression) > 0:
-            if self._expr:
-                if int(self._round) == 0:
-                    self._new = int(round(eval(expression), 0))
+        expression = str(re.sub("[^0-9][+, -, *, /, %, .][//, **]", "", current))
+        try:
+            if len(expression) > 0:
+                if self._expr:
+                    if int(self._round) == 0:
+                        self._new = int(round(eval(expression), 0))
+                    else:
+                        self._new = round(float(eval(expression)), self._round)
+                    self.delete(0, "end")
+                    self.insert(0, self._new)
+                    self._old = self._new
                 else:
-                    self._new = round(float(eval(expression)), self._round)
-                self.delete(0, "end")
-                self.insert(0, self._new)
-                self._old = self._new
+                    if int(self._round) == 0:
+                        numbers = re.sub("[^0-9]", "", current)
+                    else:
+                        numbers = round(float(re.sub("[^0-9, .]", "", current)), self._round)
+                    self.delete(0, "end")
+                    self.insert(0, numbers)
             else:
-                if int(self._round) == 0:
-                    numbers = re.sub("[^0-9]", "", current)
-                else:
-                    numbers = round(float(re.sub("[^0-9, .]", "", current)), self._round)
                 self.delete(0, "end")
-                self.insert(0, numbers)
-        else:
+                self.insert(0, self._old)
+        except:
             self.delete(0, "end")
-            self.insert(0, self._old)
+            self.insert(0, "Error")
         
     def cget(self, key):
         """Return the resource value for a KEY given as string"""
