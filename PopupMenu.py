@@ -22,7 +22,7 @@ class PopupMenu(tk.Menu):
             <<PopupMenuPopup>>
     """
     
-    def __init__(self, master=None, relx=-2, rely=-2, **kwargs):
+    def __init__(self, master=None, relx=-3, rely=-3, **kwargs):
         self._relx = relx
         self._rely = rely
         kwargs.update({"tearoff" : False})
