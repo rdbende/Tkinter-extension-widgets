@@ -6,6 +6,7 @@
 * [LinkLabel](#linklabel)
 * [ToggledFrame](#toggled)
 * [PopupMenu](#popupmenu)
+* [MenuBar](#menubar)
 * [Image](#image)
 
 
@@ -209,6 +210,36 @@ rely (int): The Y position of the popup relative to the cursor, in pixels (defau
 ```python
 popupmenu = PopupMenu(master)
 ```
+
+<div id="menubar"></div>
+
+<br>
+
+## MenuBar
+
+#### A simple menu bar that appears on the top of the window
+        
+### Standard menu options:
+            
+activebackground, activeborderwidth\
+activeforeground, background, bd, bg\
+borderwidth, cursor, disabledforeground\
+fg, font, foreground, name, postcommand\
+relief, selectcolor, takefocus, tearoff\
+tearoffcommand, title, type
+
+### Widget-specific options:
+            
+tearoff (bool): Disables / enables tearoff of all menus and submenus (default is False)
+
+### Usage:
+
+```python      
+menubar = MenuBar(master)
+submenu = tk.Menu(menubar)
+menubar.add_cascade(menu=submenu)
+```
+
 
 <div id="image"></div>
 
