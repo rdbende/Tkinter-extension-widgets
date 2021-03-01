@@ -1,7 +1,6 @@
 # Tkinter extension widgets
 
 * [Theme](#theme)
-* [NumEntry](#numentry)
 * [ToolTip](#tooltip)
 * [LinkLabel](#linklabel)
 * [ToggledFrame](#toggled)
@@ -40,34 +39,6 @@ If you have a theme package (e.g. [awthemes](https://sourceforge.net/projects/tc
 ```python
 theme = Theme(master, pkg='path to a theme package', name='name of theme you want to use')
 ```
-
-<div id="numentry"></div>
-
-<br>
-
-## NumEntry
-
-#### An entry that takes numbers and calculates the result of a calculation
-        
-### Standard entry options:
-            
-class, cursor, exportselection\
-invalidcommand, justify, show\
-state, style, takefocusxscrollcommand\
-textvariable, validate, validatecommand, width
-                
-### Widget-specific options:
-            
-expressions (bool): Allow the use of expressions (default is True)\
-roundto (int): The number of decimals in the result (default is 0)
-            
-### Usage:
-
-```python
-numentry = NumEntry(master, roundto=2)
-numentry.pack(pady=20)
-```
-
 
 <div id="tooltip"></div>
 
