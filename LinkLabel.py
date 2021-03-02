@@ -1,8 +1,6 @@
-"""
-Simple clickable link widget for tkinter
-Based on RedFantom's LinkLabel: <https://github.com/TkinterEP/ttkwidgets/blob/master/ttkwidgets/linklabel.py>
-"""
+"""Simple clickable link widget for tkinter"""
 
+# Based on RedFantom's LinkLabel: (https://github.com/TkinterEP/ttkwidgets/blob/master/ttkwidgets/linklabel.py)
 import tkinter as tk
 from tkinter import ttk
 import webbrowser
