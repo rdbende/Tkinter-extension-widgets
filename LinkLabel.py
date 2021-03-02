@@ -1,4 +1,7 @@
-"""Simple clickable link widget for tkinter"""
+"""
+Simple clickable link widget for tkinter
+Based on RedFantom's LinkLabel: <https://github.com/TkinterEP/ttkwidgets/blob/master/ttkwidgets/linklabel.py>
+"""
 
 import tkinter as tk
 from tkinter import ttk
@@ -35,13 +38,20 @@ class LinkLabel(ttk.Label):
             link.pack()
     """
     
+    
     def __init__(self, master, **kwargs):
+        
         self._url = kwargs.pop("url", "https://")
         self._normalcolor = kwargs.pop("foreground", "#0007ff")
         self._hovercolor = kwargs.pop("hovercolor", "#00009f")
         self._visitedcolor = kwargs.pop("visitedcolor", "#6600aa")
         self._visited = kwargs.pop("visited", False)
-        self._cursor = kwargs.pop("cursor", "hand2")
+        if root.tk.call('tk', 'windowingsystem') == 'win32':
+            self._cursor = kwargs.pop("cursor", "hand2")
+        elif root.tk.call('tk', 'windowingsystem') == 'aqua':
+            self._cursor = kwargs.pop("cursor", "pointinghand")
+        else:
+            self._cursor = kwargs.pop("cursor", "hand1")
         self.is_visited = self._visited
         ttk.Label.__init__(self, master, **kwargs, cursor=self._cursor)
         self.bind("<Button-1>", self._open)
@@ -49,18 +59,21 @@ class LinkLabel(ttk.Label):
         self.bind("<Leave>", self._leave)
         self._leave()
 
+        
     def _enter(self, *args):
         if self._visited:
             self.config(foreground=self._visitedcolor)
         else:
             self.config(foreground=self._hovercolor)
 
+            
     def _leave(self, *args):
         if self._visited:
             self.config(foreground=self._visitedcolor)
         else:
             self.config(foreground=self._normalcolor)
 
+            
     def _open(self, *args):
         """Opens the given url in the default webbrowser"""
         self._visited = True
@@ -69,11 +82,13 @@ class LinkLabel(ttk.Label):
         webbrowser.open(self._url)
         self._leave()
 
+        
     def clear(self):
         """Clears the visited, and hovered statement"""
         self._visited = False
         self.is_visited = self._visited
         self._leave()
+        
         
     def cget(self, key):
         """Return the resource value for a KEY given as string"""
@@ -87,6 +102,7 @@ class LinkLabel(ttk.Label):
             return self._visitedcolor
         else:
             return ttk.Label.cget(self, key)    
+    
     
     def keys(self):
         """Return a list of all resource names of this widget"""
