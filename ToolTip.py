@@ -1,30 +1,34 @@
-"""Simple tooltip widget for tkinter"""
+"""
+Author: rdbende
+License: GNU GPLv3
+Copyright (c): 2021 rdbende
+"""
+
 
 import tkinter as tk
 
-class ToolTip(object):
-    """
-        Popup help for tkinter widgets
-        
-        Standard label options:
-            anchor, background, borderwidth, class
-            compound, cursor, font, foreground, image
-            justify, padding, relief, state, style, takefocus
-            text, textvariable, underlinewidth, wraplength
+class ToolTip:
+    """Popup help for Tkinter widgets"""
 
-        Widget-specific options:
-            wait (int): Wait before appearing in seconds (default is 1)
-            duration (int): Wait before disappearing in seconds(default is 10)
-            direction (str): Direction relative to the parent. Directions: cursor above below right left (default is cursor)
-            ipadx (int): Inner X padding of the tooltip (default is 3)
-            ipady (int): Inner Y padding of the tooltip (default is 1)
-
-        Usage:
-            tooltip = ToolTip(master, text='ToolTip', wait='1', duration='5', direction='cursor')
-    """
-    
     def __init__(self, master, **kwargs):
+        """
+        Create a ToolTip
+        
+        :param wait: wait before appearing (in seconds)
+        :type wait: int
+        :param duration: wait before disappearing (in seconds)
+        :type duration: int
+        :param direction: direction relative to the parent
+            directions: cursor, above, below, right, left (default is cursor)
+        :type: str
+        :param ipadx: inner X padding of the tooltip
+        :type ipadx: int
+        :param ipady: inner Y padding of the tooltip
+        :type ipady: int
+        :param kwargs: options to be passed on to the :class:`ttk.Label` initializer inside the tooltip
+        """
         self.master = master
+        self._text = kwargs.pop("text", None)
         self._wait = int(kwargs.pop("wait", "1")) * 1000
         self._duration = int(kwargs.pop("duration", "10")) * 1000
         self._direction = kwargs.pop("direction", "cursor")
@@ -33,11 +37,19 @@ class ToolTip(object):
         self._ipadx = kwargs.pop("ipadx", "3")
         self._ipady = kwargs.pop("ipady", "1")
         self.kwargs = kwargs
-        self.master.bind("<Enter>", self._enter)
-        self.master.bind("<Leave>", self._hidetip)
-        self.master.bind("<ButtonPress>", self._hidetip)
+        if self._text is not None:
+            self.master.bind("<Enter>", self._enter)
+            self.master.bind("<Leave>", self._hidetip)
+            self.master.bind("<ButtonPress>", self._hidetip)
+        
+    def __getitem__(self, key):
+        return self.cget(key)
+
+    def __setitem__(self, key, value):
+        self.configure(**{key: value})
         
     def _enter(self, *args):
+        """Initialize the :class:`tk.Toplevel`"""
         self._toplevel = tk.Toplevel(self.master)
         self._toplevel.overrideredirect(True)
         self._toplevel.withdraw()
@@ -45,13 +57,15 @@ class ToolTip(object):
         self.id1 = self.master.after(self._duration, self._hidetip)
         
     def _hidetip(self, *args):
+        """Destroy the tooltip"""
         self.master.after_cancel(self.id0)
         self.master.after_cancel(self.id1)
         self._toplevel.destroy()
 
     def _showtip(self):
+        """Display the tooltip"""
         self._toplevel.deiconify()
-        label = tk.Label(self._toplevel, self.kwargs, relief=self._relief, borderwidth=self._bd)
+        label = tk.Label(self._toplevel, text=self._text, relief=self._relief, borderwidth=self._bd, **self.kwargs)
         label.pack(ipadx=self._ipadx, ipady=self._ipady)
         if self._direction == "above":
             self.x = int(self.master.winfo_rootx() + (self.master.winfo_width() / 2) - (label.winfo_reqwidth() / 2))
@@ -65,12 +79,14 @@ class ToolTip(object):
         elif self._direction == "left":
             self.x = self.master.winfo_rootx() - label.winfo_reqwidth() - 5
             self.y = int(self.master.winfo_rooty()  + (self.master.winfo_height() / 2) - (label.winfo_reqheight() / 2))
-        elif self._direction is "cursor":
+        elif self._direction == "cursor":
             self.x = label.winfo_pointerx() + 10
             self.y = label.winfo_pointery() + 20
         self._toplevel.geometry("+{}+{}".format(self.x, self.y))
         
     def configure(self, **kwargs):
+        """Configure resources of the widget."""
+        self._text = kwargs.pop("text", None)        
         self._wait = int(kwargs.pop("wait", "1")) * 1000
         self._duration = int(kwargs.pop("duration", "10")) * 1000
         self._direction = kwargs.pop("direction", "cursor")
@@ -79,12 +95,18 @@ class ToolTip(object):
         self._ipadx = kwargs.pop("ipadx", "3")
         self._ipady = kwargs.pop("ipady", "1")
         self.kwargs = kwargs
+        if self._text is not None:
+            self.master.bind("<Enter>", self._enter)
+            self.master.bind("<Leave>", self._hidetip)
+            self.master.bind("<ButtonPress>", self._hidetip)
         
     config = configure
     
     def cget(self, key):
         """Return the resource value for a KEY given as string"""
-        if key == "wait":
+        if key == "text":
+            return self._text
+        elif key == "wait":
             return int(self._wait / 1000)
         elif key == "duration":
             return int(self._duration / 1000)
@@ -94,15 +116,19 @@ class ToolTip(object):
             return self._ipadx
         elif key == "ipady":
             return self._ipady
+        elif key == "relief":
+            return self._relief
+        elif key == "borderwidth":
+            return self._bd
         else:
             return self.kwargs.get(key)
     
     def keys(self):
         """Return a list of all resource names of this widget"""
-        _label = tk.Label()
-        keys = _label.keys()
+        label = tk.Label()
+        keys = label.keys()
         keys.extend(["wait", "duration", "direction", "ipadx", "ipady"])
-        keys = sorted(keys)
+        keys.sort()
         return keys
 
 # Test
@@ -116,6 +142,7 @@ if __name__ == '__main__':
     button = tk.Button(root, text='Button', command=root.destroy)
     button.pack(pady=20)
 
-    tooltip = ToolTip(button, text='Info')
+    tooltip = ToolTip(button)
+    tooltip.config(text='bende')
     
     root.mainloop()
