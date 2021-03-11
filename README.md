@@ -64,9 +64,8 @@ from NumberEntry import NumberEntry
 
 root = tk.Tk()
 
-link = LinkLabel(root, text='LinkLabel', cursor='crosshair', url='https://github.com/rdbende/Tkinter-extension-widgets')
-link.bind('<<LinkOpened>>', callback)
-link.pack(pady=20)
+entry = LinkLabel(root, expressions=True, roundto=4)
+entry.pack(pady=20)
 
 root.mainloop()
 ```
