@@ -43,7 +43,7 @@ class LinkLabel(ttk.Label):
         self._visitedcolor = kwargs.pop("visitedcolor", "#660099")
         self.is_visited = kwargs.pop("visited", False)
         self._master = master or tk._default_root
-        if self._master.tk.call('tk', 'windowingsystem') == 'aqua':
+        if self._master.tk.call("tk", "windowingsystem") == "aqua":
             self._cursor = kwargs.pop("cursor", "pointinghand")
         else:
             self._cursor = kwargs.pop("cursor", "hand2")
