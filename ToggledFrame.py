@@ -53,6 +53,12 @@ class ToggledFrame(ttk.Frame):
         self.state = "collapsed"
         if self._expanded:
             self.toggle()
+            
+    def __getitem__(self, key):
+        return self.cget(key)
+
+    def __setitem__(self, key, value):
+        self.configure(**{key: value})
 
     def toggle(self, *args):
         """Expand or collapse the frame"""
