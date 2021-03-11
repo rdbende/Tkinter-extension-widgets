@@ -1,60 +1,77 @@
-"""Simple context / popupmenu for tkinter"""
+"""
+Author: rdbende
+License: GNU GPLv3
+Copyright (c): 2021 rdbende
+"""
 
 import tkinter as tk
 
+
 class PopupMenu(tk.Menu):
-    """
-        Popup menus are very useful, but so complicated to create them in Tkinter, so this is the widget you need
-        
-        Standard menu options:
-            activebackground, activeborderwidth
-            activeforeground, background, bd, bg
-            borderwidth, cursor, disabledforeground
-            fg, font, foreground, name, postcommand
-            relief, selectcolor, takefocus, tearoff
-            tearoffcommand, title, type
-
-        Widget-specific options:
-            relx (int): The X position of the popup relative to the cursor, in pixels (default is -3)
-            rely (int): The Y position of the popup relative to the cursor, in pixels (default is -3)
-
-        Virtual Event:
-            <<PopupMenuPopup>>
-    """
+    """A simple popup menu for Tkinter"""
     
-    def __init__(self, master=None, relx=-3, rely=-3, **kwargs):
-        self._relx = relx
-        self._rely = rely
-        kwargs.update({"tearoff" : False})
-        tk.Menu.__init__(self, **kwargs)
-        self._platform = root.tk.call('tk', 'windowingsystem')
-        if self._platform == 'aqua':
-            master.bind('<Button-2>', self._popup)
-            master.bind('<Control-1>', self._popup)
+    def __init__(self, master=None, **kwargs):
+        """
+        Create a tk.Menu
+        
+        Options:
+            
+            offsetx (int): the X offset popup relative to the cursor ()
+            offsety (int): the Y offset relative to the cursor ()
+            kwargs: options to be passed on to the tk.Menu initializer
+             
+        Generates:
+        
+            virtual event: <<PopupMenuPopup>> 
+        """
+        self._offx = kwargs.pop("offsetx", -2)
+        self._offy = kwargs.pop("offsety", -2)
+        tearoff = kwargs.pop("tearoff", False)
+        tk.Menu.__init__(self, tearoff, **kwargs)
+        self._master = master or tk._default_root
+        if self._master.tk.call("tk", "windowingsystem") == "aqua":
+            master.bind("<Button-2>", self._popup)
+            master.bind("<Control-1>", self._popup)
         else:
-            master.bind('<Button-3>', self._popup)
+            master.bind("<Button-3>", self._popup)
+            
+    def __getitem__(self, key):
+        return self.cget(key)
+
+    def __setitem__(self, key, value):
+        self.configure(**{key: value})
 
     def _popup(self, event):
-        self.event_generate('<<PopupMenuPopup>>')
         try:
-            self.tk_popup(int(event.x_root + self._relx), int(event.y_root + self._rely))
+            self.tk_popup(int(event.x_root + self._offx), int(event.y_root + self._offy))
+            self.event_generate("<<PopupMenuPopup>>")
         finally:
             self.grab_release()
-
-# Test
-
-if __name__ == '__main__':
+            
+    def add_submenu(self, *args, **kwargs):
+        """Alias for add_cascade"""
+        self.add_cascade(*args, **kwargs)
+        
+    def configure(self, **kwargs):
+        """Configure resources of the widget."""
+        self._offx = kwargs.pop("offsetx", self._offx)
+        self._offy = kwargs.pop("offsety", self._offy)
+        tk.Menu.configure(**kwargs)
+        
+    config = configure
     
-    root = tk.Tk()
-    root.title('PopupMenu')
-    root.geometry('250x100')
+    def cget(self, key):
+        """Return the resource value for a KEY given as string"""
+        if key == "offsetx":
+            return self._offx
+        elif key == "offsety":
+            return self._offy
+        else:
+            return tk.Menu.cget(key)
     
-    def callback():
-        print('PopupMenu')
-    
-    popupmenu = PopupMenu(root)
-    popupmenu.add_command(label='Command 1', command=callback)
-    popupmenu.add_command(label='Command 2', command=callback)
-    popupmenu.add_command(label='Command 3', command=callback)
-    
-    root.mainloop()
+    def keys(self):
+        """Return a list of all resource names of this widget"""
+        keys = tk.Menu.keys()
+        keys.extend(["offsetx", "offsety"])
+        keys.sort()
+        return keys
