@@ -1,68 +1,150 @@
-"""An image display widget for tkinter"""
+"""
+Author: rdbende
+License: GNU GPLv3
+Copyright (c): 2021 rdbende
+"""
 
 import tkinter as tk
 
 class Image(tk.Label):
-    """
-        If you want to display an image, without PhotoImage or PIL, the easiest way is this widget
-        
-        Options:
-            file (str): Path to image file. Valid filetypes: gif png pgm ppm
-            data (str): Image data URI
-            cursor (str): The cursor of the image, similar to other tkinter widgets
-            anchor (str): The anchor of the image, similar to other tkinter widgets
-            relief (str): The relief of the image, similar to other tkinter widgets
-
-            Usage:
-            image = Image(master, file='path to the image file you want to display', cursor='hand2', relief='groove')
-            image.pack()
-    """
+    """An image display widget for tkinter"""
 
     def __init__(self, master, **kwargs):
+        """
+        Create an image
+                
+        Options:
+        
+            file (str): path to image file
+            data (str): image data URI
+            cursor (str): image cursor
+            anchor (str): image anchor
+            relief (str): image relief
+            borderwidth (int): image borderwidth
+            
+        Methods:
+            blank: display a transparent image
+            clear: clear the image file and data from the widget, and blanks the image
+            copy: return a new PhotoImage with the same image as this widget
+            get: return the color (red, green, blue) of the pixel at 'x','y'
+            image_names: return the available image names in the program
+            image_types: return the available image types in the program
+            subsample: return a new PhotoImage based on the same image as this widget
+                        but use only every 'x'th or 'y'th pixel. If y is not given, the
+                        default value is the same as x
+            put: put row formatted colors to image starting from
+                    position 'to', e.g. image.put("{red green} {blue yellow}", to=(4,6))
+            write: write image to file 'filename' in 'format' starting from
+                    position 'form_coords'
+            zoom: return a new PhotoImage with the same image as this widget,
+                    but zoom it with a factor of x in the 'x' direction and y in the 'y'
+                    direction.  If y is not given, the default value is the same as x
+        """
         self._file = kwargs.pop("file", None)
         self._data = kwargs.pop("data", None)
         self._cursor = kwargs.pop("cursor", "arrow")
-        self._anchor = kwargs.pop("anchor", "center")
-        self._relief = kwargs.pop("relief", "flat")
+        self._anchor = kwargs.pop("anchor", tk.CENTER)
+        self._relief = kwargs.pop("relief", tk.FLAT)
+        self._bd = kwargs.pop("borderwidth", 0)
         if self._data is not None and self._file is None:
-            self.image = tk.PhotoImage(data=self._data)
+            self._image = tk.PhotoImage(data=self._data)
         elif self._file is not None and self._data is None:
-            self.image = tk.PhotoImage(file=self._file)
+            self._image = tk.PhotoImage(file=self._file)
         else:
-            raise Exception("Couldn't use file and image data at the same time")
-        tk.Label.__init__(self, master, image=self.image, cursor=self._cursor, anchor=self._anchor, relief=self._relief)
+            raise Exception("Couldn't use image file and image data at the same time")
+        tk.Label.__init__(self, master, image=self._image, cursor=self._cursor, anchor=self._anchor, relief=self._relief, borderwidth=self._bd)
+    
+    def __getitem__(self, key):
+        return self.cget(key)
+
+    def __setitem__(self, key, value):
+        self.configure(**{key: value})
         
+    def clear(self):
+        """Clear the image file and data from the widget, and blanks the image"""
+        self._file = None
+        self._data = None
+        self._image.blank()
+        tk.Label.update(self)
+        
+    def blank(self):
+        """Display a transparent image"""
+        self._image.blank()
+        
+    def copy(self):
+        """Return a new PhotoImage with the same image as this widget"""
+        return self._image.copy()
+    
+    def zoom(self, *args, **kwargs):
+        """Return a new PhotoImage with the same image as this widget,
+        but zoom it with a factor of x in the 'x' direction and y in the 'y'
+        direction.  If y is not given, the default value is the same as x"""
+        return self._image.zoom(*args, **kwargs)
+    
+    def subsample(self, *args, **kwargs):
+        """Return a new PhotoImage based on the same image as this widget
+        but use only every 'x'th or 'y'th pixel. If y is not given, the
+        default value is the same as x"""
+        return self._image.subsample(*args, **kwargs)
+    
+    def get(self, *args, **kwargs):
+        """Return the color (red, green, blue) of the pixel at 'x','y'"""
+        return self._image.get(*args, **kwargs)
+    
+    def put(self, *args, **kwargs):
+        """Put row formatted colors to image starting from
+        position 'to', e.g. image.put("{red green} {blue yellow}", to=(4,6))"""
+        self._image.put(*args, **kwargs)
+        
+    def write(self, *args, **kwargs):
+        """Write image to file 'filename' in 'format' starting from
+        position 'form_coords'"""
+        self._image.write(*args, **kwargs)
+        
+    def image_names(self):
+        """Return the available image names in the program"""
+        return tk._default_root.tk.splitlist(tk._default_root.tk.call('image', 'names'))
+
+    def image_types(self):
+        """Return the available image types in the program"""
+        return tk._default_root.tk.splitlist(tk._default_root.tk.call('image', 'types'))
+    
+    def configure(self, **kwargs):
+        """Configure resources of the widget."""
+        self._file = kwargs.pop("file", self._file)
+        self._data = kwargs.pop("data", self._data)
+        self._cursor = kwargs.pop("cursor", self._cursor)
+        self._anchor = kwargs.pop("anchor", self._anchor)
+        self._relief = kwargs.pop("relief", self._relief)
+        self._bd = kwargs.pop("borderwidth", self._bd)
+        if self._data is not None and self._file is None:
+            self._image = tk.PhotoImage(data=self._data)
+        elif self._file is not None and self._data is None:
+            self._image = tk.PhotoImage(file=self._file)
+        else:
+            raise Exception("Couldn't use image file and image data at the same time")
+        tk.Label.configure(self, image=self._image, cursor=self._cursor, anchor=self._anchor, relief=self._relief, borderwidth=self._bd)
+        
+    config = configure
+    
     def cget(self, key):
         """Return the resource value for a KEY given as string"""
-        if key is "file":
+        if key == "file":
             return self._text
-        elif key is "data":
-            return self._extext
-        elif key is "cursor":
+        elif key == "data":
+            return self._data
+        elif key == "cursor":
             return self._cursor
-        elif key is "anchor":
+        elif key == "anchor":
             return self._anchor
-        elif key is "relief":
+        elif key == "relief":
             return self._relief
+        elif key == "borderwidth":
+            return self._bd
         else:
-            raise AttributeError("Image widget has no attribute '" + key + "'")
+            raise AttributeError(f"Image widget has no attribute '{key}'")
     
     def keys(self):
         """Return a list of all resource names of this widget"""
-        keys = ["file", "data", "cursor", "anchor", "relief"]
+        keys = ["anchor", "borderwidth", "cursor", "data", "file", "relief"]
         return keys
-    
-# Test
-
-if __name__ == '__main__':
-
-    root = tk.Tk()
-    root.title('Image')
-    root.geometry('220x70')
-    
-    image_data = 'iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAA7AAAAOwG4ag7yAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAA71JREFUSImtl11oHFUUx393dlxMAkX7IVKpSkT8IPTDxJJ+YVujBPyAVkJEiuCTL1axtKjty9onG0QQfPVFFKzSUG1eIqaBJjZpJLUmhBIRpbUFNaUhCInd3Tl/HybJzG6yM0PNhcPeO3Pv/8c995xzZx0ZWnPhzNp8SQdkwS5BE9IapFVgJdA0pimk887UO7xqsodCwdI0XdqE1mNnOpF9itQgBJo3LOrHx+iSnO0f+fDV35N0vaSXOwrfrEf2GZJMOujMuhKhoW12AT0dHV/lbhtst9zDSHnJukc+2PfJ8ImX3gH7rSZ00SP2+LUNcxuTtP2kl1BG4Wk81XK0uyknu5/ANqRAAWFB0HDb4LLl5LkApAdygY1n2GnUT2mJYB9Nm/Q9BOGDpdC9IK8aKgmXErYV4I2Hexvq88VHZGUHYAgI3gWgBGESlGMrdB4pXw1FAhegyef3YcE6AMyuMnejz7WMliJwoeC1Fp84juYOSaqL3GWg+Z26qvEy7lXcIyVAwXugJxfX163+ST8/2+42ffe3B7CtuOUjZMeE6lLzNAt04YwX5kb5vwUv+BLA2360p0nSG5mKQ1aohJwC4pqR7dGlp/f4plKnILeSUBCSXUO6cxkwOHvRk1zbSkMdGhl5u2cG6dFlwaYdnkPrVxKK9Cvl0gGK5VeQ7lgWLN3rS7Y2A3TEYePmdAOLB47F87uMNFQ/V9fXf+TUbuS6akBBWuMvhVb0Z3B0DB88O4Cmn8FoReQioIVwAzAf036k95FrToCChI90E6k+gi5ebzjj8NCbX19F3gSiMczlahGqfjPZlIf4E5ZCkYq5fPEkzvsC1FgjNWJm2aAh67qHs8GKhRHg8uDrp+9GSnVbZou0+zxw3y6FGg4rkvPvyyaastvK6hVA+aR3oauzH6mfZVKGoJzLBs4EXLCP3dYfJzyAnGcvI12MQ02Kp8pKAGfBjrN1+MjCPQfA7kK/PzdzZS+BPUhY9KYuvHV6isAGagCKmNs+f19GrVQ1BrDAcMVJ1zI6u/Ao8brW5As7IagFNqSzi15CYLFrU8Eh1zI0Xks75ZurBHK1XOqB2ipdGjsa592VpJz4lRluO+kMF6O5iKkdz5qQroSBaYnayeBAswm5GLc/XPNAr9v8wwTSuXCeU5J0sqv/ujXGPfnLSI8tjdSK3H1IoztPILs+X6//xZV/SZJO/QujsbZGPHUjNmUsGv8gveZaL5z6X2AAqeAxdu45UDvSNqR1yFYj+UgzSDdBY5gGKPqfu12D02ma/wHhz94W7ZGK5wAAAABJRU5ErkJggg=='
-    
-    image = Image(root, data=image_data)
-    image.pack(pady=20)
-    
-    root.mainloop()
