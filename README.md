@@ -22,8 +22,8 @@
 - `wait` (int) wait before appearing (in milliseconds)
 - `duration` (int) wait before disappearing (in milliseconds)
 - `direction` (str) direction relative to the parent. Directions: `cursor`, `above`, `below`, `right`, `left` (default is `cursor`)
-- `ipadx` (int) inner X padding of the tooltip
-- `ipady` (int) inner Y padding of the tooltip
+- `ipadx` (int) inner X padding of the tooltip (default is 2)
+- `ipady` (int) inner Y padding of the tooltip (default is 1)
 - `kwargs` options to be passed on to the `tk.Label` initializer inside the tooltip
 
 
@@ -83,9 +83,9 @@ root.mainloop()
 - `file` (str) path to image file. Valid filetypes: `gif` `png` `pgm` `ppm`
 - `data` (str) image data URI
 - `cursor` (str) image cursor
-- `anchor` (str) image anchor
-- `relief` (str) image relief
-- `borderwidth` (int) image borderwidth
+- `anchor` (str) image anchor (default is `center`)
+- `relief` (str) image relief  (default is `flat`)
+- `borderwidth` (int) image borderwidth  (default is 0)
 
 ### Methods:
 - `blank` display a transparent image
@@ -98,7 +98,7 @@ root.mainloop()
 but use only every `x`th or `y`th pixel. If y is not given, the
 default value is the same as x
 - `put` put row formatted colors to image starting from
-position 'to', e.g. image.put("{red green} {blue yellow}", to=(4,6))
+position 'to'
 - `write` write image to file `filename` in `format` starting from
 position `form_coords`
 - `zoom` return a new PhotoImage with the same image as this widget,
