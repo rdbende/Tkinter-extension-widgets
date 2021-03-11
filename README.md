@@ -64,7 +64,7 @@ from NumberEntry import NumberEntry
 
 root = tk.Tk()
 
-entry = LinkLabel(root, expressions=True, roundto=4)
+entry = NumberEntry(root, expressions=True, roundto=4)
 entry.pack(pady=20)
 
 root.mainloop()
@@ -338,7 +338,7 @@ root = tk.Tk()
 def callback():
     print('ToggledFrame')
 
-frame = ToggledFrame(root, text="Toggle", width=40, expanded=True)
+frame = ToggledFrame(root, text="ToggledFrame", width=40, expanded=True)
 frame.bind(<<ToggledFrameToggled>>, callback)
 frame.pack(pady=10)
 
