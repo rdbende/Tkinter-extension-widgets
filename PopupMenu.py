@@ -27,7 +27,7 @@ class PopupMenu(tk.Menu):
         self._offx = kwargs.pop("offsetx", -2)
         self._offy = kwargs.pop("offsety", -2)
         tearoff = kwargs.pop("tearoff", False)
-        tk.Menu.__init__(self, tearoff, **kwargs)
+        tk.Menu.__init__(self, tearoff=tearoff, **kwargs)
         self._master = master or tk._default_root
         if self._master.tk.call("tk", "windowingsystem") == "aqua":
             master.bind("<Button-2>", self._popup)
