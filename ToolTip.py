@@ -14,12 +14,13 @@ class ToolTip:
         Create a ToolTip
         
         Options:
+        
             wait: (int) wait before appearing (in miliseconds)
             duration: (int) wait before disappearing (in miliseconds)
             direction: (str) direction relative to the parent. Directions: cursor, above, below, right, left (default is cursor)
             ipadx: (int) inner X padding of the tooltip
             ipady: (int) inner Y padding of the tooltip
-            kwargs: options to be passed on to the ttk.Label initializer inside the tooltip
+            kwargs: options to be passed on to the tk.Label initializer inside the tooltip
         """
         self.master = master
         self._text = kwargs.pop("text", None)
