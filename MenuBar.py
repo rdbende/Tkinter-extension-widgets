@@ -1,71 +1,41 @@
-"""A simple menubar for tkinter"""
+"""
+Author: rdbende
+License: GNU GPLv3
+Copyright (c): 2021 rdbende
+"""
 
 import tkinter as tk
-import _tkinter
 
 class MenuBar(tk.Menu):
-    """
-        A simple menu bar that appears on the top of the window
-        
-        Standard menu options:
-            
-            activebackground, activeborderwidth,
-            activeforeground, background, bd, bg
-            borderwidth, cursor, disabledforeground
-            fg, font, foreground, name, postcommand
-            relief, selectcolor, takefocus, tearoff
-            tearoffcommand, title, type
+    """A simple menubar for Tkinter windows"""
+    
+    def __init__(self, master=None, tearoff=False, **kwargs):
+        """
+        Create a menubar
                 
-        Widget-specific options:
+        Options:
             
-            tearoff (bool): Disables / enables tearoff of all menus and submenus (default is False)
+            tearoff (bool): disables / enables tearoff of all menus and submenus (default is False / disabled)
+            kwargs: options to be passed on to the tk.Menu initializer
             
-        Usage:
+        Methods:
         
-            menubar = MenuBar(master)
-            submenu = tk.Menu(menubar)
-            menubar.add_cascade(menu=submenu)
-    """
-    
-    def __init__(self, master, tearoff=False, **kwargs):
+            add_submenu: alias for add_cascade
+            add_applemenu: creating Apple-icon menu on Mac
+        """
         tk.Menu.__init__(self, **kwargs)
-        master.option_add('*tearOff', tearoff)
         try:
+            master.option_add("*tearOff", tearoff)
             master.configure(menu=self)
-        except _tkinter.TclError:
-            raise _tkinter.TclError('The parent of the menubar must be a tk.Tk or tk.Toplevel widget')
-
-# Test
-
-if __name__ == '__main__':
-    
-    root = tk.Tk()
-    root.title('MenuBar')
-    root.geometry('250x50')
-    
-    def callback():
-        print('MenuBar')
-    
-    menubar = MenuBar(root, background='#007fff')
-    
-    # Testing the Apple menu, and help menu (on X11)
-    if root.tk.call('tk', 'windowingsystem') == 'aqua':
-        appmenu = tk.Menu(menubar, name='apple')
-        menubar.add_cascade(menu=appmenu)
-        appmenu.add_command(label='Apple submenu')
-    elif root.tk.call('tk', 'windowingsystem') == 'x11':
-        helpmenu = tk.Menu(menubar, name='help')
-        menubar.add_cascade(menu=helpmenu)
-        helpmenu.add_command(label='About')
+        except:
+            raise tk.TclError("The parent of the menubar must be a 'tk.Tk' or 'tk.Toplevel' instance")
         
-    menu_1 = tk.Menu(menubar)
-    menubar.add_cascade(menu=menu_1, label='Submenu 1')
-    menu_1.add_command(label='Submenu command', command=callback)
-    
-    menu_2 = tk.Menu(menubar)
-    menubar.add_cascade(menu=menu_2, label='Submenu 2')
-    menu_2.add_command(label='Submenu command', command=callback)
-    
-    menubar.add_command(label='Command', command=callback)  
-    
-    root.mainloop()
+    def add_submenu(self, *args, **kwargs):
+        """Alias for add_cascade"""
+        self.add_cascade(*args, **kwargs)
+            
+    def add_applemenu(self, *args, **kwargs):
+        kwargs.update({"name" : "apple"})
+        self.apple_menu = tk.Menu(self, *args, **kwargs)
+        self.add_cascade(menu=self.apple_menu)
+        
