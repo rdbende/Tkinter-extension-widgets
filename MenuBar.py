@@ -21,7 +21,7 @@ class MenuBar(tk.Menu):
         Methods:
         
             add_submenu: alias for add_cascade
-            add_applemenu: creating Apple-icon menu on Mac
+            add_applemenu: create Apple-icon menu on Mac
         """
         tk.Menu.__init__(self, **kwargs)
         try:
@@ -35,6 +35,7 @@ class MenuBar(tk.Menu):
         self.add_cascade(*args, **kwargs)
             
     def add_applemenu(self, *args, **kwargs):
+        """Create Apple-icon menu on Mac"""
         kwargs.update({"name" : "apple"})
         self.apple_menu = tk.Menu(self, *args, **kwargs)
         self.add_cascade(menu=self.apple_menu)
