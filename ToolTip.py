@@ -49,7 +49,6 @@ class ToolTip:
         self.configure(**{key: value})
         
     def _enter(self, *args):
-        print('enter')
         """Initialize the :class:`tk.Toplevel`"""
         self._toplevel = tk.Toplevel(self.master)
         self._toplevel.overrideredirect(True)
@@ -58,15 +57,12 @@ class ToolTip:
         
     def _hidetip(self, *args):
         """Destroy the tooltip"""
-        print('hide')
         self.master.after_cancel(self.id0)
         self.master.after_cancel(self.id1)
         self._toplevel.destroy()
 
     def _showtip(self):
-        """Display the tooltip"""
-        print('ok')
-        
+        """Display the tooltip"""        
         self._toplevel.deiconify()
         self.label = tk.Label(self._toplevel, text=self._text, relief=self._relief, borderwidth=self._bd, **self.kwargs)
         self.label.pack(ipadx=self._ipadx, ipady=self._ipady)
@@ -87,14 +83,12 @@ class ToolTip:
             self.y = self.label.winfo_pointery() + 20
         else:
             raise ValueError("'direction' must be one of 'above, below, right, left, cursor'")
-        print('OK')
         self._toplevel.geometry("+{}+{}".format(self.x, self.y))
         self.id1 = self.master.after(self._duration, self._hidetip)
         self._toplevel.update_idletasks()
         
     def configure(self, **kwargs):
         """Configure resources of the widget."""
-        print('config')
         self._text = kwargs.pop("text", self._text)        
         self._wait = int(kwargs.pop("wait", self._wait))
         self._duration = int(kwargs.pop("duration", self._duration))
@@ -108,7 +102,6 @@ class ToolTip:
             self.master.bind("<Enter>", self._enter)
             self.master.bind("<Leave>", self._hidetip)
             self.master.bind("<ButtonPress>", self._hidetip)
-            print('bind')
         
     config = configure
     
