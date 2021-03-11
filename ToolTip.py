@@ -4,7 +4,6 @@ License: GNU GPLv3
 Copyright (c): 2021 rdbende
 """
 
-
 import tkinter as tk
 
 class ToolTip:
@@ -14,18 +13,13 @@ class ToolTip:
         """
         Create a ToolTip
         
-        :param wait: wait before appearing (in miliseconds)
-        :type wait: int
-        :param duration: wait before disappearing (in miliseconds)
-        :type duration: int
-        :param direction: direction relative to the parent
-            directions: cursor, above, below, right, left (default is cursor)
-        :type: str
-        :param ipadx: inner X padding of the tooltip
-        :type ipadx: int
-        :param ipady: inner Y padding of the tooltip
-        :type ipady: int
-        :param kwargs: options to be passed on to the :class:`ttk.Label` initializer inside the tooltip
+        Options:
+            wait: (int) wait before appearing (in miliseconds)
+            duration: (int) wait before disappearing (in miliseconds)
+            direction: (str) direction relative to the parent. Directions: cursor, above, below, right, left (default is cursor)
+            ipadx: (int) inner X padding of the tooltip
+            ipady: (int) inner Y padding of the tooltip
+            kwargs: options to be passed on to the ttk.Label initializer inside the tooltip
         """
         self.master = master
         self._text = kwargs.pop("text", None)
