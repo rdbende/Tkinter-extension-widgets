@@ -155,7 +155,7 @@ copy = copy.zoom(x=4, y=2)
 copy = copy.subsample(x=-1, y=1)
 
 # Put a red square on the picture
-copy.put("{red red red red red red red red red red} {red red red red red red red red red red}", to=(50, 20))
+copy.put("{red red red red red red red red} {red red red red red red red red}", to=(50, 20))
 
 edited = tk.Label(root, image=copy)
 edited.pack(pady=20)
@@ -289,7 +289,7 @@ root = tk.Tk()
 def callback():
     print('LinkLabel')
 
-link = LinkLabel(root, text='LinkLabel', cursor='crosshair', url='https://github.com/rdbende/Tkinter-extension-widgets')
+link = LinkLabel(root, text='LinkLabel', url='https://github.com/rdbende/Tkinter-extension-widgets')
 link.bind('<<LinkOpened>>', callback)
 link.pack(pady=20)
 
