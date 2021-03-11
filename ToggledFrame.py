@@ -1,98 +1,107 @@
-"""A collapsible and expandable frame for tkinter"""
+"""
+Author: rdbende
+License: GNU GPLv3
+Copyright (c): 2021 rdbende
+"""
+
+# Based on RedFantom's ToggledFrame:
+# https://github.com/RedFantom/ttkwidgets/blob/master/ttkwidgets/frames/toggledframe.py
 
 import tkinter as tk
 from tkinter import ttk as ttk
 
 class ToggledFrame(ttk.Frame):
-    """
-        If you want to save whitespace, it's a great idea to use ToggledFrame
-        
-        Options:
-            text (str): The text shown on the expander button
-            width (int): The width of the expander button given in characters
-            cursor (str): The expander button's cursor
-            expanded (bool): Determines whether the frame is open by default
-
-        Virtual Events:
-            <<ToggledFrameToggled>>
-            <<ToggledFrameExpanded>>
-            <<ToggledFrameCollapsed>>
-
-        Widget method:
-            toggle Expand or collapse the frame
-
-        Variable:
-            state expanded or collapsed
-
-        Usage:
-            frame = ToggledFrame(master, text="Toggle", width=40, expanded=True)
-            frame.pack()
+    """A collapsible and expandable frame for tkinter"""
+    
+    def __init__(self, master=None, **kwargs):
+        """
+        Create a ToggledFrame
+                
+        ToggledFrame options:
             
-            button = ttk.Button(frame.frame, text="Button")
-            button.pack()
-    """
-
-    def __init__(self, master, **kwargs):
+            text (str): the text shown on the expander button
+            width (int): the width of the expander button given in characters
+            cursor (str): the expander button's cursor
+            expanded (bool): determines whether the frame is expanded by default
+            kwargs: kwargs: options to be passed on to the ttk.Frame initializer
+            
+        Generates:
+            
+            virtual event: <<ToggledFrameToggled>>
+            virtual event: <<ToggledFrameExpanded>>
+            virtual event: <<ToggledFrameCollapsed>>
+            
+        Method:
+            
+            toggle : expand / collapse the frame
+            
+        Variable:
+        
+            state: expanded / collapsed
+        """
         self._expanded = kwargs.pop("expanded", False)
-        self._text = kwargs.pop("text", "")
+        self._text = kwargs.pop("text", None)
         self._cursor = kwargs.pop("cursor", "arrow")
-        self._width = kwargs.pop("width", "20")
+        self._width = kwargs.pop("width", 20)
         self._toggled = tk.BooleanVar(value=self._expanded)
-        ttk.Frame.__init__(self, master)
-        self._button = ttk.Checkbutton(self, style='Toolbutton', cursor=self._cursor, command=self.toggle, variable=self._toggled, offvalue=False, onvalue=True, text=self._text, width=self._width)
+        ttk.Frame.__init__(self, master, **kwargs)
+        self._button = ttk.Checkbutton(self, style="Toolbutton", cursor=self._cursor,
+                                       variable=self._toggled, command=self.toggle,
+                                       text=self._text, width=self._width)
         self._button.grid(row=0, column=0, sticky="new")
         self.frame = ttk.Frame(self)
+        self.state = "collapsed"
         if self._expanded:
             self.toggle()
 
-    def toggle(self):
+    def toggle(self, *args):
         """Expand or collapse the frame"""
-        self.event_generate("<<ToggledFrameToggled>>")
-        if not self._toggled.get():
+        if self.state == "expanded":
             self._toggled.set(False)
             self.frame.grid_forget()
             self.state = "collapsed"
             self.event_generate("<<ToggledFrameCollapsed>>")
-        elif self._toggled.get():
+        else:
             self._toggled.set(True)
             self.frame.grid(row=1, column=0, sticky="nswe")
             self.state = "expanded"
             self.event_generate("<<ToggledFrameExpanded>>")
+        self.event_generate("<<ToggledFrameToggled>>")
+            
+    def configure(self, **kwargs):
+        self._expanded = kwargs.pop("expanded", self._expanded)
+        self._text = kwargs.pop("text", self._text)
+        self._cursor = kwargs.pop("cursor", self._cursor)
+        self._width = kwargs.pop("width", self._width)
+        self._button.configure(text=self._text, cursor=self._cursor, width=self._width)
+        ttk.Frame.configure(self, **kwargs)
+        if self._expanded:
+            self.state = "collapsed"
+            self.toggle()
+        else:
+            self.state = "expanded"
+            self.toggle()
+        
+    config = configure
             
     def cget(self, key):
         """Return the resource value for a KEY given as string"""
-        if key == "text":
+        if key == "cursor":
+            return self._cursor
+        elif key == "expanded":
+            return self._expanded
+        elif key == "state":
+            return self.state
+        elif key == "text":
             return self._text
         elif key == "width":
-            return self._extext
-        elif key == "cursor":
-            return self._cursor
+            return self._width
         else:
-            raise ValueError("ToggledFrame widget has no attribute '" + key + "'")
+            return ttk.Frame.cget(key)
     
     def keys(self):
         """Return a list of all resource names of this widget"""
-        keys = ["text", "width", "cursor"]
+        keys = ttk.Frame.keys()
+        keys.extend(["cursor", "text", "width"])
+        keys.sort()
         return keys
-    
-# Test
-
-if __name__ == '__main__':
-
-    root = tk.Tk()
-    root.title('ToggledFrame')
-    
-    def toggle_print(*args):
-        print('Toggled')
-    
-    frame = ToggledFrame(root, text='Toggle', width=40)
-    frame.pack()
-    frame.bind('<<ToggledFrameToggled>>', toggle_print)
-    
-    def callback():
-        print('Button clicked')
-    
-    button = ttk.Button(frame.frame, text='Button', command=callback)
-    button.pack(pady=10)
-    
-    root.mainloop()
