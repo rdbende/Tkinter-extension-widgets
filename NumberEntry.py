@@ -16,10 +16,11 @@ class NumberEntry(ttk.Entry):
         """
         Create a NumberEntry
         
-        :param expressions: Allow the use of expressions (default is True)
-        :type expressions: bool
-        :param roundto: The number of decimals in the result (default is 0)
-        :type roundto: int
+        Options:
+        
+        expressions: allow the use of expressions (default is True)
+        roundto: (int) the number of decimals in the result (default is 0)
+        kwargs: options to be passed on to the ttk.Entry initializer
         """
         self._expr = kwargs.pop("expressions", True)
         self._round = kwargs.pop("roundto", 0)
@@ -76,8 +77,8 @@ class NumberEntry(ttk.Entry):
 
     def configure(self, **kwargs):
         """Configure resources of the widget."""
-        self._expr = kwargs.pop("expressions", True)
-        self._round = kwargs.pop("roundto", 0)
+        self._expr = kwargs.pop("expressions", self._expr)
+        self._round = kwargs.pop("roundto", self._round)
         ttk.Entry.configure(self, **kwargs)
 
     config = configure
@@ -97,25 +98,3 @@ class NumberEntry(ttk.Entry):
         keys.extend(["expressions", "roundto"])
         keys = sorted(keys)
         return keys
-      
-
-
-# Test
-
-if __name__ == '__main__':
-    
-    root = tk.Tk()
-    root.title('NumberEntry')
-        
-    entry = NumberEntry(root, expressions=False, roundto=4)
-    entry.pack()
-    entry.insert(0, "1+2-3*4/5**6")
-    root.update()
-    entry._check()
-    root.update()
-    entry._replace("1+2-3*4/5**6")
-    root.update()
-    entry._eval()
-    root.update()
-
-    root.mainloop()
